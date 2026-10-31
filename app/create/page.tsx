@@ -76,6 +76,7 @@ export default function CreateEvent(){
                     value={form.name}
                     onChange={handleChange}
                     required
+                    pattern=".*[a-zA-Z].*"
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition"
                 />
                 </div>

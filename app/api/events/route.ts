@@ -10,6 +10,9 @@ export async function POST(req: NextRequest): Promise<NextResponse>{
         return NextResponse.json({error: 'All fields required'}, {status: 400})
     }
 
+    if (!/[a-zA-Z]/.test(name)) {
+    return NextResponse.json({ error: 'Event name must contain at least one letter' }, { status: 400 })
+    }
 
     // Create a unique slug from the event name + random suffix
     const base = slugify(name, { lower: true, strict: true })
