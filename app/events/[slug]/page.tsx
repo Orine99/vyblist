@@ -1,9 +1,11 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
 
 import {useState , useEffect} from 'react'
 import { useParams } from 'next/navigation'
 import {supabase} from '@/lib/supabase'
+
 
 type Event = {
   id: string
