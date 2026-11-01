@@ -62,7 +62,7 @@ export async function POST(req: NextRequest): Promise<NextResponse>{
 
         // Send email
   await resend.emails.send({
-    from: 'orinestephenson4@gmail.com',
+    from: 'Vyblist <onboarding@resend.dev>',
     to: email,
     subject: `Your ticket for ${eventData?.name} 🎟️`,
     html: `
