@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic'
 import {useState , useEffect} from 'react'
 import { useParams } from 'next/navigation'
 import {supabase} from '@/lib/supabase'
+import QRCode from 'qrcode'
 
 
 type Event = {
@@ -12,7 +13,7 @@ type Event = {
   name: string
   date: string
   venue: string
-    capacity: number
+  capacity: number
   slug: string
 }
 
@@ -25,6 +26,7 @@ export default function EventPage(){
 
     const[form, setForm] = useState({name: '', email: ''})
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'duplicate' | 'full' | 'error'>('idle')
+    const[qrImage, setQrImage ] = useState<string | null>(null)
 
  useEffect(() => {
     const fetchEvent = async () => {
@@ -62,6 +64,14 @@ export default function EventPage(){
     })
 
     if(res.ok){
+        const data = await res.json()
+        // Generate QR code image from the token
+        const url = await QRCode.toDataURL(data.qr_token, {
+          width: 256,
+          margin: 2,
+          color: { dark: '#000000', light: '#ffffff' },
+        })
+        setQrImage(url)
         setStatus('success')
         setForm({name: '', email: ''})
     }else if (res.status === 409){
@@ -136,11 +146,16 @@ export default function EventPage(){
           </div>
 
           {/* Registration form */}
-          {status === 'success' ? (
-            <div className="text-center bg-green-500/10 border border-green-500/20 rounded-2xl p-8">
-              <p className="text-4xl mb-4">🎟️</p>
-              <h2 className="text-xl font-black mb-2">You&apos;re on the list!</h2>
-              <p className="text-gray-400 text-sm">Check your email — your QR ticket is on its way.</p>
+          {/* Success — show QR ticket */}
+          {status === 'success' && qrImage ? (
+            <div className="text-center bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8">
+              <p className="text-4xl mb-2">🎟️</p>
+              <h2 className="text-xl font-black mb-1">You&apos;re on the list!</h2>
+              <p className="text-gray-400 text-sm mb-6">Show this QR code at the door</p>
+              <div className="inline-block bg-white p-4 rounded-2xl mb-6">
+                <img src={qrImage} alt="Your QR ticket" width={200} height={200} />
+              </div>
+              <p className="text-xs text-gray-500">Save a screenshot of this ticket</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
