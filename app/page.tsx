@@ -1,11 +1,13 @@
 'use client'
 
 import {useState} from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Home(){
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'duplicate' | 'error'>('idle')
 
+  const router = useRouter()
   const handleSubmit = async (e: React.FormEvent) =>{
     e.preventDefault()
     setStatus('loading')
@@ -27,9 +29,9 @@ export default function Home(){
     
   }
   return (
-    <main className="min-h-screen bg-[#A28089] text-black flex flex-col">
+  <main className="min-h-screen bg-[#818571] text-black flex flex-col">
       {/* Nav */}
-      <nav className="flex items-center justify-between px-6 py-5 max-w-6xl mx-auto w-full">
+      <nav className="flex  items-center justify-between px-10 py-9 max-w-6xl mx-auto w-full">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
             <span className="text-white font-black text-sm">V</span>
@@ -39,9 +41,24 @@ export default function Home(){
         <span className="text-xs font-semibold text-violet-400 bg-violet-400/10 border border-violet-400/20 px-3 py-1 rounded-full">
           Coming Soon
         </span>
+        {/* Right side of nav */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => router.push('/events')}
+              className="text-sm font-semibold text-gray-300 hover:text-white px-5 py-2.5 rounded-xl hover:bg-white/5 transition"
+            >
+              Browse Events
+            </button>
+             <button
+              onClick={() => router.push('#waitlist')}
+              className="text-sm font-bold bg-gradient-to-r from-[#F5A623] to-[#F97316] text-black px-5 py-2.5 rounded-xl hover:opacity-90 transition"
+            >
+              Join Waitlist
+            </button>
+          </div>
       </nav>
       {/* Hero */}
-      <section className="relative flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
+      <section className="  bg-[#C6CEA5] relative flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
         {/* Glow */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-600/20 rounded-full blur-[120px]" />

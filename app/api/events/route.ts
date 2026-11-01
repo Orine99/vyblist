@@ -4,9 +4,9 @@ import slugify from 'slugify'
 
 
 export async function POST(req: NextRequest): Promise<NextResponse>{
-    const {name , date, venue, capacity } = await req.json()
+    const {name , date, venue, capacity, description} = await req.json()
     
-    if(!name || !date || !venue || !capacity){
+    if(!name || !date || !venue || !capacity || !description){
         return NextResponse.json({error: 'All fields required'}, {status: 400})
     }
 
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest): Promise<NextResponse>{
 
     const {data, error} = await supabase
                 .from('events')
-                .insert({name,date,venue, capacity: parseInt(capacity), slug})
+                .insert({name,date,venue, capacity: parseInt(capacity), slug, description})
                 .select()
                 .single()
     if(error){
