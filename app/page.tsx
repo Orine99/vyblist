@@ -27,7 +27,7 @@ export default function Home(){
     
   }
   return (
-    <main className="min-h-screen bg-[#0d0d1a] text-white flex flex-col">
+    <main className="min-h-screen bg-[#A28089] text-black flex flex-col">
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-5 max-w-6xl mx-auto w-full">
         <div className="flex items-center gap-2">
@@ -40,7 +40,6 @@ export default function Home(){
           Coming Soon
         </span>
       </nav>
-
       {/* Hero */}
       <section className="relative flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
         {/* Glow */}
