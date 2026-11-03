@@ -2,6 +2,7 @@
 
 import {useState} from 'react'
 import { useRouter } from 'next/navigation'
+import '@/styles/home.css'
 
 export default function Home(){
   const [email, setEmail] = useState('')
@@ -31,141 +32,249 @@ export default function Home(){
   return (
   <main className="min-h-screen bg-[#818571] text-black flex flex-col">
       {/* Nav */}
-      <nav className="flex  items-center justify-between px-10 py-9 max-w-6xl mx-auto w-full">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
-            <span className="text-white font-black text-sm">V</span>
+      <nav className="vyblist-nav">
+        <div className="vyblist-nav__logo">
+          <div className="vyblist-nav__logo-icon">
+            <span>V</span>
           </div>
-          <span className="font-bold text-lg tracking-tight">Vyblist</span>
+          <span className="vyblist-nav__logo-text">Vyblist</span>
         </div>
-        <span className="text-xs font-semibold text-violet-400 bg-violet-400/10 border border-violet-400/20 px-3 py-1 rounded-full">
-          Coming Soon
-        </span>
+
         {/* Right side of nav */}
-          <div className="flex items-center gap-3">
+          <div className="vyblist-nav__actions">
             <button
               onClick={() => router.push('/events')}
-              className="text-sm font-semibold text-gray-300 hover:text-white px-5 py-2.5 rounded-xl hover:bg-white/5 transition"
+              className="vyblist-btn vyblist-btn--ghost "
             >
               Browse Events
             </button>
              <button
               onClick={() => router.push('#waitlist')}
-              className="text-sm font-bold bg-gradient-to-r from-[#F5A623] to-[#F97316] text-black px-5 py-2.5 rounded-xl hover:opacity-90 transition"
+              className="vyblist-btn vyblist-btn--primary"
             >
               Join Waitlist
             </button>
           </div>
       </nav>
       {/* Hero */}
-      <section className="  bg-[#C6CEA5] relative flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
-        {/* Glow */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-600/20 rounded-full blur-[120px]" />
-          <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-fuchsia-600/15 rounded-full blur-[80px]" />
-        </div>
+      <section className="vyblist-hero">
+              {/*Glow blobs — decorative background light*/}
 
-        <div className="relative z-10 max-w-3xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-8">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-sm text-gray-300">Built for Caribbean event culture</span>
+              <div className="vyblist-hero__glow-purple" />
+              <div className="vyblist-hero__glow-gold" />
+        
+
+              <div className="vyblist-hero__content">
+                  {/* Badge */}
+                  <div className="vyblist-hero__badge">
+                    <span className="vyblist-hero__badge-dot" />
+                    <span >Built for Caribbean event culture</span>
+                  </div>
+
+                  {/* Headline */}
+                  <h1 className="vyblist-hero__headline">
+                    Event ticketing <br />
+                    <span className="vyblist-hero__headline-gradient">
+                      that matches the vibes
+                    </span>
+                  </h1>
+
+                  {/* Sub */}
+                  <p className="vyblist-hero__subtext">
+                    No more Google Forms. No more searching guest lists by hand.
+                    Vyblist gives promoters a smart RSVP system with QR check-in,
+                    a Highlight Hub for event moments, and real-time guest management —
+                    all from your phone.
+                  </p>
+
+                  {/* Form */}
+                  <div id="waitlist" className="vyblist-hero__form-wrapper">
+                      {status === 'success' ? (
+                        <div className="vyblist-hero__success">
+                            <p className="vyblist-hero__success-title">🎉 You're on the list!</p>
+                            <p className="vyblist-hero__success-sub">We'll hit you up when we launch.</p>
+                        </div>
+                      ) : (
+                  
+                      <form onSubmit={handleSubmit} className="vyblist-hero__form">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        required
+                        disabled={status === 'loading'}
+                        className="vyblist-hero__input"
+                      />
+                      <button
+                        type="submit"
+                        disabled={status === 'loading'}
+                        className="vyblist-btn vyblist-btn--primary"
+                      >
+                        {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
+                      </button>
+                    </form>)}
+
+                    {status === 'duplicate' && (
+                      <p className="vyblist-hero__msg vyblist-hero__msg--warning">
+                        You're already on the list! 👊
+                      </p>
+                    )}
+                    {status === 'error' && (
+                      <p className="vyblist-hero__msg vyblist-hero__msg--error">
+                        Something went wrong. Try again in a sec.
+                      </p>
+                    )}
+
+                    <p className="vyblist-hero__disclaimer">
+                      No spam. Just a heads-up when we launch.
+                    </p>
+                  </div>
+              </div>
+
+      </section>
+
+      {/*Stats bar*/}
+      <section className="vyblist-stats">
+        <div className="vyblist-stats__grid">
+          <div className="vyblist-stats__item">
+            <p className="vyblist-stats__value">100%</p>
+            <p className="vyblist-stats__label">Free to Start</p>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">
-            Event ticketing{' '}
-            <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-              that matches the vibes
-            </span>
-          </h1>
+          <div className="vyblist-stats__divider" />
 
-          {/* Sub */}
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-            No more Google Forms. No more searching guest lists by hand.
-            Vyblist gives promoters a smart RSVP system with QR check-in,
-            a Highlight Hub for event moments, and real-time guest management —
-            all from your phone.
-          </p>
+          <div className="vyblist-stats__item">
+            <p className="vyblist-stats__value">QR</p>
+            <p className="vyblist-stats__label">Instant check-in</p>
+          </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              required
-              disabled={status === 'loading' || status === 'success'}
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition disabled:opacity-50"
-            />
-            <button
-              type="submit"
-              disabled={status === 'loading' || status === 'success'}
-              className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-semibold px-6 py-3 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-            >
-              {status === 'loading' ? 'Joining...' : status === 'success' ? '✓ You\'re in!' : 'Join Waitlist'}
-            </button>
-          </form>
+          <div className="vyblist-stats__divider" />
 
-          {/* Status messages */}
-          {status === 'success' && (
-            <p className="mt-4 text-green-400 text-sm font-medium">
-              🎉 Welcome to the list! We&apos;ll hit you when we launch.
-            </p>
-          )}
-          {status === 'duplicate' && (
-            <p className="mt-4 text-yellow-400 text-sm font-medium">
-              You&apos;re already on the list — we got you! 👊
-            </p>
-          )}
-          {status === 'error' && (
-            <p className="mt-4 text-red-400 text-sm font-medium">
-              Something went wrong. Try again in a sec.
-            </p>
-          )}
+          <div className="vyblist-stats__item">
+            <p className="vyblist-stats__value vyblist-stats__value--live">Live</p>
+            <p className="vyblist-stats__label">Real-time dashboard</p>
+          </div>
 
-          <p className="mt-5 text-gray-600 text-xs">
-            No spam. Just a heads-up when we launch.
-          </p>
         </div>
-      </section>
 
-      {/* Features strip */}
-      <section className="border-t border-white/5 py-16 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: '🎟️',
-              title: 'QR Ticket Check-in',
-              desc: 'Guests get a unique QR code on registration. Scan with any phone — no hardware needed.',
-            },
-            {
-              icon: '📸',
-              title: 'Highlight Hub',
-              desc: 'Promoters share a QR at the event. Guests upload photos and videos directly to the event gallery.',
-            },
-            {
-              icon: '📊',
-              title: 'Real-time Dashboard',
-              desc: 'See who\'s checked in, capacity status, and guest counts — all live as people walk through the door.',
-            },
-          ].map((f) => (
-            <div
-              key={f.title}
-              className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-6 hover:border-violet-500/30 transition"
-            >
-              <div className="text-3xl mb-4">{f.icon}</div>
-              <h3 className="font-bold text-lg mb-2">{f.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{f.desc}</p>
+      </section>
+      {/* How it works */}
+      <section className="vyblist-how">
+        <div className="vyblist-how__inner">
+
+          <div className="vyblist-how__header">
+            <p className="vyblist-how__label">How it works</p>
+            <h2 className="vyblist-how__title">Three steps to a smooth event</h2>
+          </div>
+
+          <div className="vyblist-how__grid">
+
+            <div className="vyblist-how__card">
+              <span className="vyblist-how__step">01</span>
+              <p className="vyblist-how__icon">🎪</p>
+              <h3 className="vyblist-how__card-title">Create your event</h3>
+              <p className="vyblist-how__card-desc">
+                Set the name, date, venue, and capacity. Vyblist generates
+                a shareable link instantly.
+              </p>
             </div>
-          ))}
+
+            <div className="vyblist-how__card">
+              <span className="vyblist-how__step">02</span>
+              <p className="vyblist-how__icon">🎟️</p>
+              <h3 className="vyblist-how__card-title">Guests register</h3>
+              <p className="vyblist-how__card-desc">
+                Share the link. Guests fill in their name and email and get
+                a QR ticket sent straight to their inbox.
+              </p>
+            </div>
+
+            <div className="vyblist-how__card">
+              <span className="vyblist-how__step">03</span>
+              <p className="vyblist-how__icon">📱</p>
+              <h3 className="vyblist-how__card-title">Scan at the door</h3>
+              <p className="vyblist-how__card-desc">
+                Use your phone to scan QR codes at the entrance. The
+                dashboard updates live as guests check in.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+      {/* Features */}
+      <section className="vyblist-features">
+        <div className="vyblist-features__inner">
+
+          <div className="vyblist-features__header">
+            <p className="vyblist-features__label">Features</p>
+            <h2 className="vyblist-features__title">Everything a promoter needs</h2>
+          </div>
+
+          <div className="vyblist-features__grid">
+
+            <div className="vyblist-features__card">
+              <span className="vyblist-features__icon">🎟️</span>
+              <div>
+                <h3 className="vyblist-features__card-title">QR Tickets</h3>
+                <p className="vyblist-features__card-desc">Every guest gets a unique QR code sent to their email the moment they register.</p>
+              </div>
+            </div>
+
+            <div className="vyblist-features__card">
+              <span className="vyblist-features__icon">📊</span>
+              <div>
+                <h3 className="vyblist-features__card-title">Live Dashboard</h3>
+                <p className="vyblist-features__card-desc">See registered vs checked-in counts in real time. Know exactly who's coming.</p>
+              </div>
+            </div>
+
+            <div className="vyblist-features__card">
+              <span className="vyblist-features__icon">📱</span>
+              <div>
+                <h3 className="vyblist-features__card-title">Phone Scanner</h3>
+                <p className="vyblist-features__card-desc">No extra hardware. Scan QR codes with your phone camera right at the entrance.</p>
+              </div>
+            </div>
+
+            <div className="vyblist-features__card">
+              <span className="vyblist-features__icon">🔒</span>
+              <div>
+                <h3 className="vyblist-features__card-title">Capacity Control</h3>
+                <p className="vyblist-features__card-desc">Set a cap. When it's full, it's full. No overbooking, no chaos.</p>
+              </div>
+            </div>
+
+            <div className="vyblist-features__card">
+              <span className="vyblist-features__icon">⚡</span>
+              <div>
+                <h3 className="vyblist-features__card-title">Instant Setup</h3>
+                <p className="vyblist-features__card-desc">Create an event in under a minute. Share the link and you're done.</p>
+              </div>
+            </div>
+
+            <div className="vyblist-features__card">
+              <span className="vyblist-features__icon">🌴</span>
+              <div>
+                <h3 className="vyblist-features__card-title">Built for the Caribbean</h3>
+                <p className="vyblist-features__card-desc">Designed with Caribbean event culture in mind — from beach parties to club nights.</p>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
+    
       {/* Footer */}
-      <footer className="border-t border-white/5 py-6 px-6 text-center">
-        <p className="text-gray-600 text-xs">© 2026 Vyblist. Built for the culture.</p>
+      <footer className="vyblist-footer">
+        <div className="vyblist-footer__inner">
+                <p className="vyblist-footer__copy">© 2026 Vyblist. Built for the culture.
+
+                </p>
+        </div>
       </footer>
     </main>
   )

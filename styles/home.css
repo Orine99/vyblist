@@ -1,0 +1,509 @@
+.vyblist-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+
+}
+
+
+.vyblist-nav__logo{
+    display: flex;  /* puts icon and text side by side */
+    align-items: center;  /* vertically centers them */
+    gap: 10px; /* space between icon and text */
+
+}
+
+
+.vyblist-nav__logo-icon {
+    position: relative; /* allows children to use absolute positioning */
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #F5A623, #7C3AED); /* diagonal gold to purple gradient */
+    border-radius: 10px; /* rounds the corners of the icon */
+    display: flex;              /* centers the V letter inside */
+    align-items: center;        /* vertical center */
+    justify-content: center;    /* horizontal center */
+
+
+}
+
+.vyblist-nav__logo-icon span{
+    color: white; /* white text for the V */
+    font-weight: 900;   /* heaviest font weight — boldest */
+    font-size: 18px;            /* size of the V */
+
+}
+
+.vyblist-nav__logo-text {
+      font-weight: 900;           /* bold brand name */
+      font-size: 20px;            /* size of the brand name */
+      letter-spacing: -0.5px;     /* tightens the spacing between letters */
+      color:white;
+}
+
+.vyblist-nav__actions {
+    display: flex;  /* puts buttons side by side */
+    align-items: center;  /* vertically centers them */
+    gap: 10px;
+}
+
+/* ─── BUTTONS ─────────────────────────────────────── */
+
+.vyblist-btn {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;/* shows hand cursor on hover */
+    transition: all 0.2s ease;  /* smoothly animates any hover changes */
+
+}
+
+
+.vyblist-btn--ghost {
+    background: transparent;    /* no background by default */
+     color: #9ca3af;             /* muted gray text */
+
+}
+
+.vyblist-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.05); /* very subtle white tint on hover */
+  color: white;               /* text brightens on hover */
+}
+
+
+.vyblist-btn--primary {
+  background: linear-gradient(135deg, #F5A623, #F97316); /* gold to orange gradient */
+  color: black;               /* dark text on light button */
+}
+
+.vyblist-btn--primary:hover {
+  opacity: 0.9;               /* slightly dims on hover as feedback */
+}
+
+
+/* ─── HERO ────────────────────────────────────────── */
+
+.vyblist-hero {
+    position: relative;          /* needed so glow blobs position against this */
+    display: flex;
+    flex-direction: column;      /* stacks children vertically */
+    align-items: center;         /* centers everything horizontally */
+    text-align: center;
+    padding: 80px 24px 120px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;            /* clips the glow blobs at the edges */
+    background:whitesmoke;
+}
+
+
+.vyblist-hero__glow-purple {
+  position: absolute;     /* sits behind content */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* centers it horizontally */
+  width: 600px;
+  height: 400px;
+  background: rgba(124, 58, 237, 0.2); /* purple at 20% opacity */
+  border-radius: 50%;          /* makes it a soft oval */
+  filter: blur(120px);         /* spreads it into a soft glow */
+  pointer-events: none;        /* mouse clicks pass through it */
+
+}
+
+
+.vyblist-hero__glow-gold {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 200px;
+  background: rgba(245, 166, 35, 0.1); /* gold at 10% opacity */
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+
+.vyblist-hero__content{
+      position: relative;          /* sits above the glow blobs */
+      z-index: 1;
+
+}
+
+.vyblist-hero__badge {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     background: rgba(245, 166, 35, 0.1);
+     border: 1px solid rgba(245, 166, 35, 0.2);
+     border-radius: 999px;        /* fully pill shaped */
+     padding: 6px 16px;
+     margin-bottom: 32px;
+     font-size: 12px;
+     font-weight: 600;
+     color: #F5A623;
+     text-transform: uppercase;
+     letter-spacing: 0.05em;
+
+}
+
+.vyblist-hero__badge-dot {
+   width: 8px;
+   height: 8px;
+   border-radius: 50%;          /* makes it a circle */
+   background: #F5A623;
+   animation: pulse 2s infinite; /* breathing pulse animation */
+
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }          /* fades in and out */
+}
+
+
+.vyblist-hero__headline{
+    font-size: clamp(40px, 7vw, 72px); /* scales with screen size */
+    font-weight:900;
+    line-height: 1.05; /* tight line spacing */
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    color: Black;
+
+}
+
+.vyblist-hero__headline-gradient {
+   background: linear-gradient(90deg, #F5A623, #F97316, #7C3AED);
+    -webkit-background-clip: text;  /* clips background to text shape */
+    -webkit-text-fill-color: transparent; /* makes text itself transparent */
+    background-clip: text;
+
+}
+
+
+.vyblist-hero__subtext {
+ font-size: 18px;
+ color:#9ca3af;
+ max-width:520px;
+ margin: 0 auto 48px;
+ line-height: 1.7;
+
+}
+
+
+.vyblist-hero__form-wrapper {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+
+}
+
+.vyblist-hero__form {
+ display: flex;
+ gap: 12px;
+ flex-wrap : wrap; /* allows the input and button to wrap on smaller screens */
+ width: 100%;
+ justify-content: center; /* centers the form elements horizontally */
+}
+
+
+
+.vyblist-hero__input{
+    flex: 1;
+    min-width: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(14, 13, 13, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color:black;
+    font-size: 14px;
+    outline: none; /* removes the default blue outline on focus */
+    transition: border 0.2s ease;
+}
+
+
+.vyblist-hero__input:focus {
+  border-color: rgba(245, 166, 35, 0.5); /* gold glow on focus */
+}
+
+.vyblist-hero__input::placeholder {
+  color: #6b7280;
+}
+
+.vyblist-hero__success-title {
+  color: #F5A623;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.vyblist-hero__success-sub {
+  color: #9ca3af;
+  font-size: 14px;
+  margin: 0;
+}
+
+.vyblist-hero__msg {
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+
+.vyblist-hero__msg--warning { color: #facc15; }
+.vyblist-hero__msg--error   { color: #f87171; }
+
+.vyblist-hero__disclaimer {
+    color: #4b5563;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+
+/* ─── STATS BAR ───────────────────────────────────── */
+
+.vyblist-stats{
+    width:100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 32px 24px;
+    background: rgba(255, 255, 255, 0.5); /* semi-transparent white */
+
+}
+
+.vyblist-stats__grid {
+    display: flex; /* puts all three items in a row */
+    align-items: center; /* vertically centers them */
+    justify-content: center; /* centers them horizontally */
+    gap: 40px; /* space between each stat item */
+    max-width: 600px;
+    margin: 0 auto; /* centers the grid in the middle of the stats bar */
+
+}
+
+.vyblist-stats__item {
+  text-align: center;
+}
+
+.vyblist-stats__value {
+    font-size: 28px;
+    font-weight: 900;
+    color: #f5a623; /* gold color for the stat value */
+    margin: 0 0 4px;
+
+}
+
+.vyblist-stats__label {
+    font-size: 13px;
+    color: black; /* muted gray for the label */
+    margin: 0;
+
+}
+
+.vyblist-stats__divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.1); /* subtle vertical line */
+}
+
+.vyblist-stats__value--live {
+  animation: liveBlink 2s ease-in-out infinite;
+}
+
+
+@keyframes liveBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ─── HOW IT WORKS ──────────────────────────────────── */
+
+.vyblist-how {
+  padding: 96px 24px; /* tall section top and bottom */
+}
+
+
+.vyblist-how__inner {
+  max-width: 960px;   /* limits width so it doesn't stretch too wide */
+  margin: 0 auto;     /* centers it */
+}
+
+
+.vyblist-how__header {
+    text-align:center;
+    margin-bottom: 64px; /* space between header and cards */
+
+}
+
+.vyblist-how__label {
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em; /* spreads letters apart — tracking */
+    text-transform: uppercase; /* makes all letters capital */
+    color: #F5A623;          /* gold */
+    margin: 0 0 12px;
+}
+
+.vyblist-how__title {
+ font-size: 36px;
+ font-weight: 900;
+ color: #111;
+ margin: 0;
+
+}
+
+.vyblist-how__grid {
+ display: grid;
+  grid-template-columns: repeat(3, 1fr); /* three equal columns */
+    gap: 24px;
+}
+
+
+.vyblist-how__card {
+
+    position: relative;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 28px;
+
+}
+
+.vyblist-how__step {
+ position: absolute; /* pulls it out of normal flow */
+ top: 20px;
+ right: 24px;
+ font-size: 52px;
+ font-weight: 900;
+ color: rgba(0, 0, 0, 0.05); /* almost invisible — decorative */
+ line-height: 1;
+ pointer-events: none; /* so it can't be accidentally clicked */
+
+}
+
+
+.vyblist-how__icon {
+ font-size: 36px;
+ margin: 0 0 16px;
+}
+
+
+.vyblist-how__card-title {
+
+    font-size: 17px;
+    font-weight: 800;
+    color: #111;
+    margin: 0 0 8px;
+
+}
+
+.vyblist-how__card-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ─── FEATURES ──────────────────────────────────────── */
+
+.vyblist-features {
+  padding: 96px 24px;
+  background: rgba(0, 0, 0, 0.02); /* barely-there tint to separate sections */
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.vyblist-features__inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.vyblist-features__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.vyblist-features__label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #7C3AED;   /* violet — different from How it works gold */
+  margin: 0 0 12px;
+}
+
+.vyblist-features__title {
+  font-size: 36px;
+  font-weight: 900;
+  color: #111;
+  margin: 0;
+}
+
+.vyblist-features__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* two columns */
+  gap: 16px;
+}
+
+.vyblist-features__card {
+  display: flex;        /* icon and text sit side by side */
+  gap: 16px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.vyblist-features__icon {
+  font-size: 28px;
+  flex-shrink: 0;  /* stops the icon from squishing when text is long */
+  margin-top: 2px; /* nudges it down slightly to align with the title */
+}
+
+.vyblist-features__card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 6px;
+}
+
+.vyblist-features__card-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+/* ─── FOOTER ────────────────────────────────────────── */
+.vyblist-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 40px 24px;
+}
+
+
+.vyblist-footer__inner {
+
+ max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+
+.vyblist-footer__copy{
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+
+}
